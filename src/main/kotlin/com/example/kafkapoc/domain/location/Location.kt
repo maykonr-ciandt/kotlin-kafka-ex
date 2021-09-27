@@ -5,6 +5,6 @@ import com.example.kafkapoc.domain.BaseEntity
 import javax.persistence.Entity
 
 @Entity
-data class Location(
-    val name: String = "",
+open class Location(
+    open val name: String = "",
 ) : BaseEntity(), BaseEntityMessage

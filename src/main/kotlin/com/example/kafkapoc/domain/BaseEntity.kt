@@ -12,17 +12,16 @@ abstract class BaseEntity : Serializable {
     @Id
     @GeneratedValue
     @Column(updatable = false)
-    private val id: UUID = UUID.randomUUID()
+    open val id: UUID = UUID.randomUUID()
 
     @Column(updatable = false)
-    private var createdAt: OffsetDateTime? = null
+    open var createdAt: OffsetDateTime? = null
 
-    private var updatedAt: OffsetDateTime? = null
+    open var updatedAt: OffsetDateTime? = null
 
     @PrePersist
     private fun prePersist() {
-        createdAt = OffsetDateTime.now()
-        updatedAt = OffsetDateTime.now()
+        createdAt = createdAt ?: OffsetDateTime.now()
     }
 
     @PreUpdate

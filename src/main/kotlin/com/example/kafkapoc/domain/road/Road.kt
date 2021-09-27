@@ -8,11 +8,11 @@ import javax.persistence.Entity
 import javax.persistence.OneToMany
 
 @Entity
-data class Road(
+open class Road(
 
-    val name: String = "",
+    open val name: String = "",
 
     @OneToMany(cascade = [CascadeType.ALL])
-    val locations: List<Location> = emptyList(),
+    open val locations: List<Location> = emptyList(),
 
     ) : BaseEntity(), BaseEntityMessage

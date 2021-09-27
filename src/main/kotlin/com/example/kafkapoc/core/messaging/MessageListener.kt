@@ -1,5 +1,6 @@
 package com.example.kafkapoc.core.messaging
 
+import com.example.kafkapoc.domain.BaseEntity
 import com.example.kafkapoc.domain.location.Location
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -11,11 +12,24 @@ class MessageListener(val mapper: ObjectMapper) {
 
     @KafkaListener(
         topics = ["kafkapoc_locations"],
+        groupId = "locations_group",
         id = "locations_1"
     )
-    fun consume(message: Message) {
+    fun consume1(message: Message) {
         val typeReference = object : TypeReference<Location>() {}
         val location = this.mapper.readValue(message.`object`, typeReference)
-        println("message received from topic : $location");
+        val baseEntity = location as BaseEntity
+        println("Consumer 1 : ${baseEntity.id}");
+    }
+
+    @KafkaListener(
+        topics = ["kafkapoc_locations"],
+        groupId = "locations_group",
+        id = "locations_2"
+    )
+    fun consume2(message: Message) {
+        val typeReference = object : TypeReference<Location>() {}
+        val location = this.mapper.readValue(message.`object`, typeReference)
+        println("Consumer 2 : ${location.name}");
     }
 }
