@@ -18,8 +18,7 @@ class MessageListener(val mapper: ObjectMapper) {
     fun consume1(message: Message) {
         val typeReference = object : TypeReference<Location>() {}
         val location = this.mapper.readValue(message.`object`, typeReference)
-        val baseEntity = location as BaseEntity
-        println("Consumer 1 : ${baseEntity.id}");
+        println("Consumer 1 : ${location.id}");
     }
 
     @KafkaListener(
@@ -30,6 +29,6 @@ class MessageListener(val mapper: ObjectMapper) {
     fun consume2(message: Message) {
         val typeReference = object : TypeReference<Location>() {}
         val location = this.mapper.readValue(message.`object`, typeReference)
-        println("Consumer 2 : ${location.name}");
+        println("Consumer 2 : ${location.id}");
     }
 }

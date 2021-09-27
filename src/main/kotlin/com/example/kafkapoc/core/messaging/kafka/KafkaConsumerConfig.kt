@@ -21,6 +21,8 @@ class KafkaConsumerConfig(@Value("\${spring.kafka.bootstrap-servers}") val boots
     @Bean
     fun consumerFactory(): ConsumerFactory<String?, Message?> {
         val props: MutableMap<String, Any> = HashMap()
+        props[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest";
+        props[ConsumerConfig.GROUP_ID_CONFIG] = "kafka_poc";
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress
         return DefaultKafkaConsumerFactory<String?, Message?>(
             props,
