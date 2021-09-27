@@ -1,7 +1,7 @@
 package com.example.kafkapoc.core.messaging.kafka
 
 import com.example.kafkapoc.core.messaging.Message
-import com.example.kafkapoc.core.messaging.Producer
+import com.example.kafkapoc.core.messaging.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.header.internals.RecordHeader
 import org.slf4j.LoggerFactory

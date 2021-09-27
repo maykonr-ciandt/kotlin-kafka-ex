@@ -1,13 +1,12 @@
 package com.example.kafkapoc.domain
 
-import com.example.kafkapoc.core.messaging.BaseEntityMessageListener
 import java.io.Serializable
 import java.time.OffsetDateTime
 import java.util.*
 import javax.persistence.*
 
 @MappedSuperclass
-@EntityListeners(BaseEntityMessageListener::class)
+@EntityListeners(BaseEntityListener::class)
 abstract class BaseEntity : Serializable {
 
     @Id

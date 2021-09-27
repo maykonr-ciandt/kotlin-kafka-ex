@@ -16,7 +16,7 @@ class KafkaProducerConfig(@Value("\${spring.kafka.bootstrap-servers}") val boots
 
     @Bean
     fun kafkaProducerFactory(): ProducerFactory<String?, Message?> {
-        val configs: MutableMap<String?, Any?> = HashMap()
+        val configs = mutableMapOf<String, Any>()
         configs[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = JsonSerializer::class.java
         configs[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
         configs[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress
