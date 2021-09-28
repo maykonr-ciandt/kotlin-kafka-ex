@@ -36,8 +36,6 @@ class KafkaConsumerConfig(@Value("\${spring.kafka.bootstrap-servers}") val boots
         // If the broker lose the index, due to a manual removal for example,
         // it will use this config to know from where to start
         props[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest";
-
-        props[ConsumerConfig.GROUP_ID_CONFIG] = "kafka_poc";
         // Address to Kafka Cluster
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress
         return DefaultKafkaConsumerFactory<String?, Message?>(
