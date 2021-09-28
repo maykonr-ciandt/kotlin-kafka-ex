@@ -3,6 +3,7 @@ package com.example.kafkapoc.domain
 import com.example.kafkapoc.core.messaging.BaseEntityMessage
 import com.example.kafkapoc.core.messaging.Message
 import com.example.kafkapoc.core.messaging.MessageOperation
+import com.example.kafkapoc.core.messaging.Topics
 import com.example.kafkapoc.core.messaging.kafka.KafkaQualifier
 import com.example.kafkapoc.core.messaging.producer.Producer
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -33,7 +34,7 @@ class BaseEntityListener(@KafkaQualifier val producer: Producer, val mapper: Obj
     private fun produceMessage(baseEntity: BaseEntity, messageOperation: MessageOperation) {
         if (baseEntity is BaseEntityMessage) {
             val message = Message("v1", messageOperation, mapper.writeValueAsString(baseEntity))
-            val topicName = "kafkapoc_" + baseEntity.javaClass.simpleName.lowercase() + "s"
+            val topicName = Topics.BASE_TOPIC + baseEntity.javaClass.simpleName.lowercase() + "s"
             producer.sendMessage(topicName, message)
         }
     }
