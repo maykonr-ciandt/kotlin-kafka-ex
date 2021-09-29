@@ -24,7 +24,6 @@ class MessageListener(val mapper: ObjectMapper) {
         // Topics being listened
         topics = ["kafkapoc_locations"],
         // Consumer group id
-        groupId = "locations_group",
         // consumer id
         id = "locations_1"
     )
@@ -36,12 +35,21 @@ class MessageListener(val mapper: ObjectMapper) {
 
     @KafkaListener(
         topics = ["kafkapoc_locations"],
-        groupId = "locations_group",
         id = "locations_2"
     )
     fun consume2(message: Message) {
         val typeReference = object : TypeReference<Location>() {}
         val location = this.mapper.readValue(message.`object`, typeReference)
         println("Consumer 2 : ${location.id}");
+    }
+
+    @KafkaListener(
+        topics = ["kafkapoc_locations"],
+        id = "locations_3"
+    )
+    fun consume3(message: Message) {
+        val typeReference = object : TypeReference<Location>() {}
+        val location = this.mapper.readValue(message.`object`, typeReference)
+        println("Consumer 3 : ${location.id}");
     }
 }
